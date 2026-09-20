@@ -43,6 +43,15 @@ def accepts_temperature(model: str) -> bool:
     return not model.startswith(_NO_SAMPLING_PREFIXES)
 
 
+# Gemma is served through the Gemini endpoint but is a different model family and
+# rejects `thinking_config` with a 400.
+_NO_THINKING_PREFIXES = ("gemma",)
+
+
+def supports_thinking(model: str) -> bool:
+    return not model.startswith(_NO_THINKING_PREFIXES)
+
+
 @dataclass(frozen=True)
 class LLMResponse:
     text: str
@@ -231,6 +240,32 @@ class GeminiClient:
         chain = [self._settings.gemini_model, *self._settings.gemini_fallback_list]
         return list(dict.fromkeys(m for m in chain if m))
 
+    def _config_for(
+        self, model: str, system: str, json_schema: dict[str, Any] | None
+    ) -> dict[str, Any]:
+        """Request config, adjusted for what this particular model accepts.
+
+        Gemma is served through the same endpoint but is not Gemini and does not
+        take every parameter — `thinking_config` returns a 400 there. Building the
+        config per model rather than once for the whole failover chain is what
+        lets a Gemini model and a Gemma model sit in the same chain.
+        """
+        from google.genai import types
+
+        config: dict[str, Any] = {
+            "system_instruction": system,
+            "temperature": self._settings.temperature,
+            "max_output_tokens": self._settings.max_tokens,
+        }
+        if supports_thinking(model):
+            config["thinking_config"] = types.ThinkingConfig(
+                thinking_budget=self._settings.gemini_thinking_budget
+            )
+        if json_schema is not None:
+            config["response_mime_type"] = "application/json"
+            config["response_json_schema"] = json_schema
+        return config
+
     def _attempt(self, model: str, user: str, config: dict[str, Any]) -> LLMResponse:
         """One model, with backoff on transient failures. Raises LLMError on giving up."""
         from google.genai import types
@@ -285,20 +320,6 @@ class GeminiClient:
         user: str,
         json_schema: dict[str, Any] | None = None,
     ) -> LLMResponse:
-        from google.genai import types
-
-        config: dict[str, Any] = {
-            "system_instruction": system,
-            "temperature": self._settings.temperature,
-            "max_output_tokens": self._settings.max_tokens,
-            "thinking_config": types.ThinkingConfig(
-                thinking_budget=self._settings.gemini_thinking_budget
-            ),
-        }
-        if json_schema is not None:
-            config["response_mime_type"] = "application/json"
-            config["response_json_schema"] = json_schema
-
         # Two independent ways the free tier fails mid-demo: a model is
         # transiently overloaded (503), or its 20-requests-per-day quota is spent
         # (429). Backoff fixes the first, and only a different model fixes the
@@ -306,7 +327,7 @@ class GeminiClient:
         errors: list[str] = []
         for model in self.models_to_try():
             try:
-                return self._attempt(model, user, config)
+                return self._attempt(model, user, self._config_for(model, system, json_schema))
             except LLMError as exc:
                 errors.append(str(exc))
         raise LLMError("all Gemini models failed — " + "; ".join(errors))

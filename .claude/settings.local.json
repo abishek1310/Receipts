@@ -72,7 +72,9 @@
       "Bash(tail -30 \"C:/Users/abish/AppData/Local/Temp/claude/E--Claude-Code/8c611ad7-2788-40e3-8b91-e63e1bb0007a/tasks/bk8bc0dqj.output\" 2>/dev/null)",
       "PowerShell(Get-NetTCPConnection -LocalPort 8601 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -Confirm:$false }; Start-Sleep -Seconds 1; \"cleared\")",
       "Bash(.venv/Scripts/python.exe -m streamlit run app.py --server.headless true --server.port 8602)",
-      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'feat: Gemini model failover; fix sidebar tally lag *)"
+      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'feat: Gemini model failover; fix sidebar tally lag *)",
+      "Bash(GEMINI_MODEL=gemma-4-26b-a4b-it GEMINI_FALLBACK_MODELS=gemma-4-31b-it PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/demo_run.py --insight ins_01)",
+      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'fix: build request config per model so Gemma works in the chain *)"
     ]
   }
 }
