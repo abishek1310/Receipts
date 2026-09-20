@@ -48,7 +48,11 @@
       "Bash(.venv/Scripts/python.exe -m pip freeze)",
       "Bash(.venv/Scripts/python.exe -m streamlit run app.py --server.headless true --server.port 8599)",
       "Bash(curl -s -o /dev/null -w \"streamlit http=%{http_code}\\\\n\" http://localhost:8599/ --max-time 20)",
-      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'feat: generation, LangGraph retry loop, Streamlit UI, eval harness *)"
+      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'feat: generation, LangGraph retry loop, Streamlit UI, eval harness *)",
+      "Bash(curl -s -o /dev/null -w \"streamlit still up: http=%{http_code}\\\\n\" http://localhost:8599/ --max-time 8)",
+      "Bash(.venv/Scripts/python.exe -m pip install -q google-genai)",
+      "Bash(sed -i 's|^## Two deliberate departures from the spec$|## Three deliberate departures from the spec|' README.md)",
+      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'feat: add Gemini provider behind the existing adapter *)"
     ]
   }
 }

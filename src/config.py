@@ -22,12 +22,24 @@ class Settings(BaseSettings):
     )
 
     # --- provider -----------------------------------------------------------------
-    llm_provider: Literal["anthropic", "openai"] = "anthropic"
+    # §3 names Anthropic and OpenAI. Gemini is here because the team has neither
+    # key and §3 also requires a deployed Streamlit Community Cloud URL, which
+    # rules out a locally hosted model. "One adapter, swappable" is the part of
+    # §3 that matters, and it held — only src/llm.py and this file changed.
+    llm_provider: Literal["anthropic", "openai", "gemini"] = "gemini"
+
     anthropic_api_key: str | None = None
     openai_api_key: str | None = None
+    gemini_api_key: str | None = None
 
     anthropic_model: str = "claude-opus-5"
     openai_model: str = "gpt-4o"
+    gemini_model: str = "gemini-flash-latest"
+
+    # Gemini 2.5 thinks by default and thinking tokens come out of the output
+    # allowance, which can return an empty body. 0 disables it; raise it if
+    # attribution quality slips.
+    gemini_thinking_budget: int = 0
 
     # §7 asks for ~0.7. Current Claude models removed sampling parameters and
     # return a 400 if sent, so `src.llm` only forwards this to models that accept
@@ -51,19 +63,19 @@ class Settings(BaseSettings):
 
     @property
     def api_key(self) -> str | None:
-        return (
-            self.anthropic_api_key
-            if self.llm_provider == "anthropic"
-            else self.openai_api_key
-        )
+        return {
+            "anthropic": self.anthropic_api_key,
+            "openai": self.openai_api_key,
+            "gemini": self.gemini_api_key,
+        }[self.llm_provider]
 
     @property
     def model(self) -> str:
-        return (
-            self.anthropic_model
-            if self.llm_provider == "anthropic"
-            else self.openai_model
-        )
+        return {
+            "anthropic": self.anthropic_model,
+            "openai": self.openai_model,
+            "gemini": self.gemini_model,
+        }[self.llm_provider]
 
     @property
     def configured(self) -> bool:

@@ -164,7 +164,7 @@ eval/               Catch rate, false-positive rate, honest failure case
 
 ---
 
-## Two deliberate departures from the spec
+## Three deliberate departures from the spec
 
 Both are noted at the top of the files they affect.
 
@@ -174,7 +174,16 @@ Both are noted at the top of the files they affect.
    model parameters. LangGraph, the part of the stack §3 actually depends on, is
    unchanged.
 
-2. **`temperature` is not sent to current Claude models.** §7 asks for ~0.7.
+2. **Gemini is wired as a third provider.** §3 names Claude or OpenAI. The team
+   has credentials for neither, and §3 *also* requires a live Streamlit Community
+   Cloud URL — which rules out a locally hosted model, since Streamlit Cloud
+   cannot reach one. Gemini's free tier satisfies both constraints. The part of
+   §3 that carries the architecture — one adapter, swappable — is what made this
+   cheap: only `src/llm.py` and `src/config.py` changed. `validation.py`,
+   `generation.py` and `graph.py` are untouched, which is the whole argument for
+   putting the provider behind an adapter in the first place.
+
+3. **`temperature` is not sent to current Claude models.** §7 asks for ~0.7.
    Sampling parameters were removed from Claude Opus 5, Sonnet 5 and the 4.7/4.8
    family and now return a 400; `output_config.effort` replaced them. The adapter
    still sends `temperature` to models that accept it. §7's actual point is

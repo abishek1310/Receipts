@@ -195,6 +195,89 @@ class OpenAIClient:
 
 
 # --------------------------------------------------------------------------------------
+# Google Gemini
+# --------------------------------------------------------------------------------------
+
+
+class GeminiClient:
+    """Gemini via the official `google-genai` SDK.
+
+    A third provider beyond the two §3 names, added because the team has no
+    Anthropic or OpenAI credentials and §3's deploy requirement (a live Streamlit
+    Community Cloud URL) rules out a locally hosted model. The architecture §3
+    actually specifies — one adapter, swappable — is what made this a contained
+    change: nothing in `generation.py`, `graph.py` or `validation.py` moved.
+
+    Worth knowing if you change this: Gemini 2.5 models think by default, and
+    thinking tokens come out of `max_output_tokens`. Left on with a modest budget
+    the response can come back with an empty `.text`, which looks exactly like a
+    provider failure. `thinking_budget=0` by default for that reason; raise it via
+    GEMINI_THINKING_BUDGET if attribution quality slips.
+    """
+
+    def __init__(self, settings: Settings):
+        from google import genai
+        from google.genai import errors
+
+        if not settings.gemini_api_key:
+            raise LLMError("GEMINI_API_KEY is not set")
+        self._errors = errors
+        self._client = genai.Client(api_key=settings.gemini_api_key)
+        self._settings = settings
+
+    def complete(
+        self,
+        *,
+        system: str,
+        user: str,
+        json_schema: dict[str, Any] | None = None,
+    ) -> LLMResponse:
+        from google.genai import types
+
+        config: dict[str, Any] = {
+            "system_instruction": system,
+            "temperature": self._settings.temperature,
+            "max_output_tokens": self._settings.max_tokens,
+            "thinking_config": types.ThinkingConfig(
+                thinking_budget=self._settings.gemini_thinking_budget
+            ),
+        }
+        if json_schema is not None:
+            config["response_mime_type"] = "application/json"
+            config["response_json_schema"] = json_schema
+
+        try:
+            response = self._client.models.generate_content(
+                model=self._settings.gemini_model,
+                contents=user,
+                config=types.GenerateContentConfig(**config),
+            )
+        except self._errors.ClientError as exc:
+            raise LLMError(f"Gemini rejected the request: {exc}") from exc
+        except self._errors.ServerError as exc:
+            raise LLMError(f"Gemini server error: {exc}") from exc
+        except self._errors.APIError as exc:
+            raise LLMError(f"Gemini API error: {exc}") from exc
+
+        text = response.text or ""
+        if not text.strip():
+            # Almost always the thinking budget eating the output allowance, or a
+            # safety block. Either way an empty body must not look like success.
+            finish = (
+                response.candidates[0].finish_reason if response.candidates else None
+            )
+            raise LLMError(f"Gemini returned no text (finish_reason={finish})")
+
+        usage = response.usage_metadata
+        return LLMResponse(
+            text=text,
+            model=response.model_version or self._settings.gemini_model,
+            input_tokens=getattr(usage, "prompt_token_count", 0) or 0,
+            output_tokens=getattr(usage, "candidates_token_count", 0) or 0,
+        )
+
+
+# --------------------------------------------------------------------------------------
 # Scripted stub — no network
 # --------------------------------------------------------------------------------------
 
@@ -230,8 +313,13 @@ class ScriptedClient:
         return LLMResponse(text=text, model="scripted")
 
 
+_PROVIDERS = {
+    "anthropic": AnthropicClient,
+    "openai": OpenAIClient,
+    "gemini": GeminiClient,
+}
+
+
 def get_client(settings: Settings | None = None) -> LLMClient:
     settings = settings or get_settings()
-    if settings.llm_provider == "openai":
-        return OpenAIClient(settings)
-    return AnthropicClient(settings)
+    return _PROVIDERS[settings.llm_provider](settings)
