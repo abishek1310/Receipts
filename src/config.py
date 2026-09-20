@@ -34,7 +34,13 @@ class Settings(BaseSettings):
 
     anthropic_model: str = "claude-opus-5"
     openai_model: str = "gpt-4o"
-    gemini_model: str = "gemini-3.5-flash"
+    gemini_model: str = "gemini-3.6-flash"
+
+    # Comma-separated models to fail over to. Each Gemini model has its own
+    # 20-requests-per-day free-tier bucket and its own overload profile, so a
+    # second and third name is the difference between a 503 ending the demo and
+    # nobody noticing.
+    gemini_fallback_models: str = "gemini-3.7-flash,gemini-3.5-flash,gemini-3-flash-preview"
 
     # Gemini 2.5 thinks by default and thinking tokens come out of the output
     # allowance, which can return an empty body. 0 disables it; raise it if
@@ -64,6 +70,10 @@ class Settings(BaseSettings):
     # Two retries after the first attempt, then the block is surfaced as
     # UNSUPPORTED rather than dropped (§6.3).
     max_retries: int = Field(default=2, ge=0, le=5)
+
+    @property
+    def gemini_fallback_list(self) -> list[str]:
+        return [m.strip() for m in self.gemini_fallback_models.split(",") if m.strip()]
 
     @property
     def api_key(self) -> str | None:

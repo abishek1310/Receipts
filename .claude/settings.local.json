@@ -65,7 +65,14 @@
       "Bash(rm -rf C:/Users/abish/AppData/Local/Temp/claude/E--Claude-Code/8c611ad7-2788-40e3-8b91-e63e1bb0007a/scratchpad/cleanvenv)",
       "Bash(python -m venv C:/Users/abish/AppData/Local/Temp/claude/E--Claude-Code/8c611ad7-2788-40e3-8b91-e63e1bb0007a/scratchpad/cleanvenv)",
       "Bash(C:/Users/abish/AppData/Local/Temp/claude/E--Claude-Code/8c611ad7-2788-40e3-8b91-e63e1bb0007a/scratchpad/cleanvenv/Scripts/python.exe -m pip install -q -r requirements.txt)",
-      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'docs: deploy instructions and st.secrets template *)"
+      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'docs: deploy instructions and st.secrets template *)",
+      "Bash(sed -i 's/^GEMINI_MODEL=.*/GEMINI_MODEL=gemini-3.6-flash/' .env)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/demo_run.py --insight ins_01 --revise \"make it softer and more clinical\")",
+      "Bash(.venv/Scripts/python.exe -m streamlit run app.py --server.headless true --server.port 8601)",
+      "Bash(tail -30 \"C:/Users/abish/AppData/Local/Temp/claude/E--Claude-Code/8c611ad7-2788-40e3-8b91-e63e1bb0007a/tasks/bk8bc0dqj.output\" 2>/dev/null)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8601 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -Confirm:$false }; Start-Sleep -Seconds 1; \"cleared\")",
+      "Bash(.venv/Scripts/python.exe -m streamlit run app.py --server.headless true --server.port 8602)",
+      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'feat: Gemini model failover; fix sidebar tally lag *)"
     ]
   }
 }

@@ -211,5 +211,12 @@ def main() -> None:
     st.session_state.generated += result.n_generated
     st.session_state.rejected += result.n_rejected
 
+    # The sidebar was rendered at the top of this run, before the turn existed, so
+    # the §10 tally would show the previous turn's totals — it read "0 generated"
+    # immediately after producing six blocks. Re-run so the counts match what is
+    # on screen. Replaying history is free: the result is already in state and no
+    # LLM call is repeated.
+    st.rerun()
+
 
 main()

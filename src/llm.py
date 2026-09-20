@@ -226,6 +226,58 @@ class GeminiClient:
         self._client = genai.Client(api_key=settings.gemini_api_key)
         self._settings = settings
 
+    def models_to_try(self) -> list[str]:
+        """Primary model first, then the fallbacks, de-duplicated."""
+        chain = [self._settings.gemini_model, *self._settings.gemini_fallback_list]
+        return list(dict.fromkeys(m for m in chain if m))
+
+    def _attempt(self, model: str, user: str, config: dict[str, Any]) -> LLMResponse:
+        """One model, with backoff on transient failures. Raises LLMError on giving up."""
+        from google.genai import types
+
+        attempts = self._settings.provider_retries + 1
+        last: Exception | None = None
+        response = None
+        for attempt in range(attempts):
+            try:
+                response = self._client.models.generate_content(
+                    model=model,
+                    contents=user,
+                    config=types.GenerateContentConfig(**config),
+                )
+                break
+            except self._errors.ClientError as exc:
+                # 429 is a quota wall — worth failing over to another model, not
+                # worth waiting out. Any other 4xx is our bug and will not fix itself.
+                if getattr(exc, "code", None) != 429:
+                    raise LLMError(f"Gemini rejected the request: {exc}") from exc
+                raise LLMError(f"{model}: daily quota exhausted") from exc
+            except self._errors.ServerError as exc:
+                last = exc
+            except self._errors.APIError as exc:
+                raise LLMError(f"Gemini API error: {exc}") from exc
+
+            if attempt < attempts - 1:
+                time.sleep(1.5 * (2**attempt))
+
+        if response is None:
+            raise LLMError(f"{model}: unavailable after {attempts} attempts ({last})")
+
+        text = response.text or ""
+        if not text.strip():
+            # Almost always the thinking budget eating the output allowance, or a
+            # safety block. Either way an empty body must not look like success.
+            finish = response.candidates[0].finish_reason if response.candidates else None
+            raise LLMError(f"{model}: returned no text (finish_reason={finish})")
+
+        usage = response.usage_metadata
+        return LLMResponse(
+            text=text,
+            model=response.model_version or model,
+            input_tokens=getattr(usage, "prompt_token_count", 0) or 0,
+            output_tokens=getattr(usage, "candidates_token_count", 0) or 0,
+        )
+
     def complete(
         self,
         *,
@@ -247,49 +299,17 @@ class GeminiClient:
             config["response_mime_type"] = "application/json"
             config["response_json_schema"] = json_schema
 
-        # The free tier returns 503 "high demand" often enough that an unhandled
-        # one would land mid-demo. Retry the transient codes with backoff; let
-        # everything else fail immediately, since a 400 will not fix itself.
-        attempts = self._settings.provider_retries + 1
-        last: Exception | None = None
-        for attempt in range(attempts):
+        # Two independent ways the free tier fails mid-demo: a model is
+        # transiently overloaded (503), or its 20-requests-per-day quota is spent
+        # (429). Backoff fixes the first, and only a different model fixes the
+        # second — each model has its own daily bucket. So: retry, then fail over.
+        errors: list[str] = []
+        for model in self.models_to_try():
             try:
-                response = self._client.models.generate_content(
-                    model=self._settings.gemini_model,
-                    contents=user,
-                    config=types.GenerateContentConfig(**config),
-                )
-                break
-            except self._errors.ClientError as exc:
-                if getattr(exc, "code", None) != 429:
-                    raise LLMError(f"Gemini rejected the request: {exc}") from exc
-                last = exc
-            except self._errors.ServerError as exc:
-                last = exc
-            except self._errors.APIError as exc:
-                raise LLMError(f"Gemini API error: {exc}") from exc
-
-            if attempt < attempts - 1:
-                time.sleep(2.0 * (2**attempt))
-        else:
-            raise LLMError(f"Gemini unavailable after {attempts} attempts: {last}")
-
-        text = response.text or ""
-        if not text.strip():
-            # Almost always the thinking budget eating the output allowance, or a
-            # safety block. Either way an empty body must not look like success.
-            finish = (
-                response.candidates[0].finish_reason if response.candidates else None
-            )
-            raise LLMError(f"Gemini returned no text (finish_reason={finish})")
-
-        usage = response.usage_metadata
-        return LLMResponse(
-            text=text,
-            model=response.model_version or self._settings.gemini_model,
-            input_tokens=getattr(usage, "prompt_token_count", 0) or 0,
-            output_tokens=getattr(usage, "candidates_token_count", 0) or 0,
-        )
+                return self._attempt(model, user, config)
+            except LLMError as exc:
+                errors.append(str(exc))
+        raise LLMError("all Gemini models failed — " + "; ".join(errors))
 
 
 # --------------------------------------------------------------------------------------
