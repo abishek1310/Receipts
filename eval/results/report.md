@@ -33,6 +33,6 @@ This is the trade we chose. The sentence splitter errs toward splitting, and an 
 
 Model output, verbatim:
 
-> Designed specifically for outdoor and endurance athletes aged 20-40 who refuse to let their sun care compromise their performance. While traditional sunscreens run into the eyes, feel heavy and greasy, and require constant, messy reapplication during activity, this formula wins by delivering high SPF 50+ protection in an ultra-lightweight, fast-absorbing gel that resists sweat and never stings [sig_0073, sig_0116, sig_0265, sig_0277].
+> Sweating and getting wet rapidly decreases the protection time of your daily sunscreen [sig_0105]. Instead of stopping your training session to set an 80-minute reapplication alarm, you need a formula built for high endurance [sig_0073]. Try our sweat-proof sport shield today.
 
-No valid citation tag on a claim-bearing sentence: 'Designed specifically for outdoor and endurance athletes aged 20-40 who refuse to let t...'
+No valid citation tag on a claim-bearing sentence: 'Try our sweat-proof sport shield today.'

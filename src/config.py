@@ -57,7 +57,7 @@ class Settings(BaseSettings):
     # raise to "high" if attribution quality slips.
     effort: Literal["low", "medium", "high", "xhigh", "max"] = "medium"
 
-    max_tokens: int = 4000
+    max_tokens: int = 8000
 
     # Transient-failure retries at the provider layer (503 / 429). Distinct from
     # max_retries, which is the §6.3 citation-regeneration budget.

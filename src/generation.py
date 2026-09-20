@@ -32,10 +32,43 @@ DEFAULT_MIX: tuple[tuple[BlockKind, int], ...] = (
 )
 
 _KIND_BRIEF: dict[BlockKind, str] = {
-    "hook": "a scroll-stopping TikTok hook, one or two sentences, spoken-voice",
-    "ad_copy": "a short paid-social ad line, two or three sentences",
-    "positioning": "a positioning statement describing who this is for and why it wins",
+    "hook": (
+        "a TikTok hook — ONE sentence, spoken out loud, naming one specific moment "
+        "the audience has actually lived through"
+    ),
+    "ad_copy": (
+        "paid-social ad copy — two or three sentences that build on each other: "
+        "the problem, the turn, what to do about it"
+    ),
+    "positioning": (
+        "a positioning statement — who this is for, and the specific thing it beats"
+    ),
 }
+
+# The citation rules below are long and mechanical, and a model reading them will
+# reasonably infer that being citable matters more than being good. It does not.
+# This section exists to push back, and it targets one failure directly: asked for
+# "one or two sentences", the model writes a second sentence it does not need and
+# fills it with an unrelated complaint that happens to have a signal behind it.
+_CRAFT = """\
+HOW TO WRITE THESE
+
+- **One tension per block.** Two good ideas are two blocks, not one block with
+  two sentences. Stapling unrelated complaints together is the single most
+  common way this goes wrong: "my sunscreen stings my eyes" and "reapplying is
+  annoying" are two different hooks, and jamming them into one kills both.
+- **Never add a sentence because you have another signal to cite.** Citations
+  follow the writing. The writing does not stretch to fit the citations. One
+  strong cited sentence beats three weak ones.
+- **Specific beats general.** "I set a reapply alarm for 80 minutes" is a hook.
+  "Sun protection matters for athletes" is not. The evidence is full of exact
+  details — times, product names, what it felt like. Use them.
+- **Steal their language.** These are real people talking the way your audience
+  talks. A phrase lifted from a comment will outperform anything you invent.
+- **No rhetorical questions** unless the question is itself the tension. "Why is
+  every sport SPF so greasy?" is a complaint wearing a question mark.
+- Do not open with "Tell me why", "POV:", or "Let's talk about". They are
+  filler standing where the hook should be."""
 
 
 class GenerationError(RuntimeError):
@@ -144,11 +177,13 @@ def build_user_prompt(
     wanted = "\n".join(
         f"  - {count} x {kind}: {_KIND_BRIEF[kind]}" for kind, count in mix
     )
-    prompt = f"Write:\n{wanted}"
+    prompt = f"Write:\n{wanted}\n\n{_CRAFT}"
     if direction:
         prompt += f"\n\nDirection from the user: {direction}"
     prompt += (
-        "\n\nReturn every block. Put the citation tags inside each block's `text`."
+        "\n\nBefore writing, pick the sharpest single tension in the evidence for "
+        "each block, and make sure no two blocks lean on the same one.\n\n"
+        "Return every block. Put the citation tags inside each block's `text`."
     )
     return prompt
 
