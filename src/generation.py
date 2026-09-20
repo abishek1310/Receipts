@@ -33,8 +33,8 @@ DEFAULT_MIX: tuple[tuple[BlockKind, int], ...] = (
 
 _KIND_BRIEF: dict[BlockKind, str] = {
     "hook": (
-        "a TikTok hook — ONE sentence, spoken out loud, naming one specific moment "
-        "the audience has actually lived through"
+        "a TikTok hook — ONE sentence that opens a loop the rest of the video has "
+        "to close. Not a description of the problem: a reason to keep watching"
     ),
     "ad_copy": (
         "paid-social ad copy — two or three sentences that build on each other: "
@@ -51,7 +51,38 @@ _KIND_BRIEF: dict[BlockKind, str] = {
 # "one or two sentences", the model writes a second sentence it does not need and
 # fills it with an unrelated complaint that happens to have a signal behind it.
 _CRAFT = """\
-HOW TO WRITE THESE
+WHAT A HOOK ACTUALLY IS
+
+A hook is not a statement of the problem. "I hate how my face goes red when I
+work out" describes the problem and then stops — the viewer already knows it,
+nothing has been opened, and the video has nowhere to go. A hook creates a
+tension the rest of the video is obliged to resolve. Use one of these shapes.
+
+The examples are deliberately from an unrelated category — they show the
+SHAPE, and they are not lines to reuse. Never output a sentence that appears
+anywhere in this brief; every word you write must come from you or from the
+evidence.
+
+- **Contradict what they already do.** "Your pre-workout is why you're crashing
+  at 3pm."
+- **Name the wrong diagnosis.** "Your knees don't hurt because you run. They
+  hurt because of how you land."
+- **Callout with stakes.** "If you're still sore four days later, stop
+  stretching it."
+- **Confession with a turn.** "I bought three foam rollers before anyone told
+  me the problem was my shoes."
+
+Banned openings — these are complaints wearing a hook's clothes:
+"I hate how...", "I can't stand...", "I absolutely cannot...", "Tell me why...",
+"POV:", "Let's talk about...", "Ever feel like...".
+
+Steal their vocabulary, not their sentence shape. The evidence is people
+complaining, because complaining is what people do on Reddit. Your job is to
+turn a complaint into a reason to keep watching. A phrase lifted from a comment
+will beat anything you invent — but lift the *words*, not the grammar of
+grievance.
+
+HOW TO WRITE ALL OF THEM
 
 - **One tension per block.** Two good ideas are two blocks, not one block with
   two sentences. Stapling unrelated complaints together is the single most
@@ -60,15 +91,11 @@ HOW TO WRITE THESE
 - **Never add a sentence because you have another signal to cite.** Citations
   follow the writing. The writing does not stretch to fit the citations. One
   strong cited sentence beats three weak ones.
-- **Specific beats general.** "I set a reapply alarm for 80 minutes" is a hook.
-  "Sun protection matters for athletes" is not. The evidence is full of exact
-  details — times, product names, what it felt like. Use them.
-- **Steal their language.** These are real people talking the way your audience
-  talks. A phrase lifted from a comment will outperform anything you invent.
+- **Specific beats general.** "I set a reapply alarm for 80 minutes" earns
+  attention. "Sun protection matters for athletes" does not. The evidence is
+  full of exact details — times, product names, what it felt like. Use them.
 - **No rhetorical questions** unless the question is itself the tension. "Why is
-  every sport SPF so greasy?" is a complaint wearing a question mark.
-- Do not open with "Tell me why", "POV:", or "Let's talk about". They are
-  filler standing where the hook should be."""
+  every sport SPF so greasy?" is a complaint wearing a question mark."""
 
 
 class GenerationError(RuntimeError):
