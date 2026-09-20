@@ -18,3 +18,7 @@ data/raw/*
 # Raw rejection log grows without bound and is machine-generated.
 # Curated metrics and the showcase failure (§11) ARE committed — the team shares those.
 eval/results/rejections.jsonl
+
+# Personal Claude Code permission allowlist - accumulates per-machine noise.
+# Shared project settings belong in .claude/settings.json instead.
+.claude/settings.local.json
