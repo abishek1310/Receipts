@@ -175,6 +175,14 @@ breaks any of them is rejected and you are asked to write it again.
    like "Shop now." — needs no tag.
 5. Never invent statistics, clinical results, ingredient claims, or percentages.
    None of that is in the evidence.
+6. **Do not claim more certainty than the source has.** The evidence is people
+   on the internet describing their own skin. It is not clinical data. You may
+   write "people who train four times a week keep telling us X"; you may not
+   write "studies show X", "clinically proven", "dermatologist-recommended",
+   "medical-grade", or describe a physiological mechanism the comments do not
+   state. Never call the audience "patients". A change of register must never
+   become an upgrade of evidence: the same signal cannot support a casual claim
+   on one turn and a clinical one on the next.
 
 Write copy a person would actually stop scrolling for. The citations are checked
 mechanically; the writing is the part only you can do."""
@@ -226,6 +234,11 @@ def build_revision_prompt(
     evidence-preserving revision.
     """
     current = "\n".join(f"  [{b.kind}] {b.text}" for b in previous)
+    kinds = "\n".join(
+        f"  - {kind}: {brief}"
+        for kind, brief in _KIND_BRIEF.items()
+        if any(b.kind == kind for b in previous)
+    )
     return f"""\
 Here is the copy you wrote:
 
@@ -233,9 +246,29 @@ Here is the copy you wrote:
 
 The user asks: {direction}
 
-Rewrite every block to follow that direction. The evidence set has not changed —
-re-cite from the same signal list above. A revised sentence needs a citation that
-supports the revised claim, not the one it replaced."""
+Rewrite every block to follow that direction.
+
+WHAT THE DIRECTION MAY AND MAY NOT CHANGE
+
+A direction changes the *voice*. It never changes what each block is for, and it
+never changes how strong the claims are.
+
+- **Each block keeps its job.** These are still:
+{kinds}
+  "More medical" does not turn a TikTok hook into a journal abstract — a hook
+  nobody would say out loud has stopped being a hook, whatever register it is
+  in. "Softer" does not mean hedging every claim into "sometimes", "may" and
+  "can be"; a hook full of hedges has closed the loop it exists to open. Soften
+  the tone, keep the edge.
+- **The evidence set has not changed**, so re-cite from the same signal list. A
+  revised sentence needs a citation supporting the revised claim, not the one it
+  replaced.
+- **The certainty may not change.** Rule 6 still applies, and it matters most
+  here: a register change cannot promote a Reddit comment into clinical
+  evidence. If the original said people find something helps, the revision says
+  the same thing in a different voice — not that it is proven.
+
+{_CRAFT}"""
 
 
 def build_regenerate_prompt(block: CopyBlock, result: ValidationResult) -> str:
