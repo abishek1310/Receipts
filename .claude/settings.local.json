@@ -59,7 +59,13 @@
       "Bash(grep -c \"^\\\\.env$\")",
       "WebFetch(domain:www.reddit.com)",
       "Bash(.venv/Scripts/python.exe -m pytest --collect-only -q)",
-      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'fix: purge dead Amazon links; every corpus URL now verified *)"
+      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'fix: purge dead Amazon links; every corpus URL now verified *)",
+      "PowerShell($gh = Get-Command gh -ErrorAction SilentlyContinue; if \\($gh\\) { $gh.Source; gh auth status } else { \"gh not on PATH\" }; \"--- git identity ---\"; git config --get user.name; git config --get user.email; \"--- credential helper ---\"; git config --get credential.helper)",
+      "Bash(awk '{print $5, $9}')",
+      "Bash(rm -rf C:/Users/abish/AppData/Local/Temp/claude/E--Claude-Code/8c611ad7-2788-40e3-8b91-e63e1bb0007a/scratchpad/cleanvenv)",
+      "Bash(python -m venv C:/Users/abish/AppData/Local/Temp/claude/E--Claude-Code/8c611ad7-2788-40e3-8b91-e63e1bb0007a/scratchpad/cleanvenv)",
+      "Bash(C:/Users/abish/AppData/Local/Temp/claude/E--Claude-Code/8c611ad7-2788-40e3-8b91-e63e1bb0007a/scratchpad/cleanvenv/Scripts/python.exe -m pip install -q -r requirements.txt)",
+      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'docs: deploy instructions and st.secrets template *)"
     ]
   }
 }

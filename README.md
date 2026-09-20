@@ -160,6 +160,28 @@ python scripts/build_corpus.py --reddit-shard data/raw/<shard>.parquet
 
 ---
 
+## Deploying (Streamlit Community Cloud)
+
+1. Push this repo to GitHub (public, or private with Streamlit Cloud granted
+   access).
+2. At [share.streamlit.io](https://share.streamlit.io), **New app** -> pick the
+   repo, branch `main`, main file `app.py`.
+3. **Advanced settings -> Secrets**: paste the contents of
+   `.streamlit/secrets.toml.example` with a real key filled in. Do not commit the
+   real file — `.streamlit/secrets.toml` is gitignored.
+4. Deploy.
+
+Nothing else is needed. `data/signals.jsonl` is committed, so there is no build
+step and no download at boot; Cloud installs `requirements.txt` only, which is
+why the ingest-only dependency lives in `requirements-dev.txt`.
+
+**Watch the quota.** Gemini's free tier allows **20 requests per day, per
+model**. One chat turn is one request (plus one per citation retry). Rehearse on
+one model and switch `GEMINI_MODEL` to a different one for the live run —
+`gemini-3.6-flash` and `gemini-3.7-flash` have separate daily buckets.
+
+---
+
 ## Layout
 
 ```
