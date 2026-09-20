@@ -268,8 +268,34 @@ def _amazon_titles(asins: set[str]) -> dict[str, str]:
     return titles
 
 
-def extract_amazon(reviews_path: Path, since_year: int = 2015) -> list[RawSignal]:
+DEAD_ASINS_PATH = Path(__file__).resolve().parents[1] / "data" / "dead_asins.json"
+
+
+def load_dead_asins(path: Path | None = None) -> set[str]:
+    """ASINs whose product page now 404s.
+
+    §5.1 requires every URL to resolve — "a judge will click one" — and the
+    Amazon dataset is a 2023 snapshot, so delisted products rot out of it. About
+    a third of the ASINs the first corpus selected were already dead. They are
+    denylisted here rather than filtered at read time so the list is reviewable,
+    diffable and re-checkable before demo day.
+
+    Note this cannot be checked with curl: Amazon serves an identical bot-block
+    page for live and dead ASINs alike. See scripts/check_amazon_urls.md.
+    """
+    target = path or DEAD_ASINS_PATH
+    if not target.exists():
+        return set()
+    return set(json.loads(target.read_text(encoding="utf-8")).get("dead", []))
+
+
+def extract_amazon(
+    reviews_path: Path,
+    since_year: int = 2015,
+    dead_asins: set[str] | None = None,
+) -> list[RawSignal]:
     """Pull themed, quotable skincare reviews out of a downloaded All_Beauty slice."""
+    dead = load_dead_asins() if dead_asins is None else dead_asins
     candidates: list[dict] = []
     seen: set[str] = set()
 
@@ -285,7 +311,7 @@ def extract_amazon(reviews_path: Path, since_year: int = 2015) -> list[RawSignal
             if not is_quotable(text):
                 continue
             asin = rec.get("parent_asin")
-            if not asin:
+            if not asin or asin in dead:
                 continue
             try:
                 when = datetime.fromtimestamp(rec["timestamp"] / 1000, timezone.utc).date()

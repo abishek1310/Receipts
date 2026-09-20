@@ -55,7 +55,11 @@
       "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'feat: add Gemini provider behind the existing adapter *)",
       "Bash(git check-ignore *)",
       "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/demo_run.py --insight ins_01)",
-      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'fix: accept citation tags before the full stop; capture first real failure *)"
+      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'fix: accept citation tags before the full stop; capture first real failure *)",
+      "Bash(grep -c \"^\\\\.env$\")",
+      "WebFetch(domain:www.reddit.com)",
+      "Bash(.venv/Scripts/python.exe -m pytest --collect-only -q)",
+      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'fix: purge dead Amazon links; every corpus URL now verified *)"
     ]
   }
 }

@@ -46,7 +46,7 @@
       "brief": "brief_03",
       "block": "h9",
       "variant": "spf_number",
-      "text": "SPF 50. Dupes are searched for before the original is bought. [sig_0357]",
+      "text": "SPF 50. Dupes are searched for before the original is bought. [sig_0360]",
       "reason": "UNPARSEABLE",
       "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
     },
@@ -70,7 +70,7 @@
       "brief": "brief_06",
       "block": "h9",
       "variant": "spf_number",
-      "text": "SPF 50. A white cast is a reason to skip protection entirely. [sig_0106]",
+      "text": "SPF 50. A white cast is a reason to skip protection entirely. [sig_0118]",
       "reason": "UNPARSEABLE",
       "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
     },
@@ -86,7 +86,7 @@
       "brief": "brief_08",
       "block": "h9",
       "variant": "spf_number",
-      "text": "SPF 50. Dupes are searched for before the original is bought. [sig_0344]",
+      "text": "SPF 50. Dupes are searched for before the original is bought. [sig_0357]",
       "reason": "UNPARSEABLE",
       "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
     },
@@ -94,7 +94,7 @@
       "brief": "brief_09",
       "block": "h9",
       "variant": "spf_number",
-      "text": "SPF 50. Flaking makes every other step look worse. [sig_0217]",
+      "text": "SPF 50. Flaking makes every other step look worse. [sig_0201]",
       "reason": "UNPARSEABLE",
       "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
     }

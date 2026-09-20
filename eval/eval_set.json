@@ -20,6 +20,7 @@
         "sig_0020",
         "sig_0019",
         "sig_0025",
+        "sig_0466",
         "sig_0029",
         "sig_0035",
         "sig_0033",
@@ -29,12 +30,12 @@
         "sig_0008",
         "sig_0031",
         "sig_0038",
-        "sig_0032",
         "sig_0066",
         "sig_0065",
         "sig_0078",
         "sig_0067",
         "sig_0068",
+        "sig_0416",
         "sig_0060",
         "sig_0073",
         "sig_0076",
@@ -42,7 +43,6 @@
         "sig_0061",
         "sig_0071",
         "sig_0072",
-        "sig_0075",
         "sig_0151",
         "sig_0156",
         "sig_0154",
@@ -54,7 +54,7 @@
         {
           "id": "b0",
           "kind": "hook",
-          "text": "The flush does not fade when the session ends. [sig_3596, sig_0054]",
+          "text": "The flush does not fade when the session ends. [sig_3596, sig_0076]",
           "label": "injected",
           "injection": {
             "type": "hallucinated_id",
@@ -76,32 +76,32 @@
         {
           "id": "b2",
           "kind": "positioning",
-          "text": "Calm skin is the result being asked for, not clear skin. [sig_0065, sig_0031, sig_0075]",
+          "text": "Calm skin is the result being asked for, not clear skin. [sig_0065, sig_0008, sig_0072]",
           "label": "valid",
           "injection": null
         },
         {
           "id": "b3",
           "kind": "hook",
-          "text": "The flush does not fade when the session ends. [sig_0035, sig_0151, sig_0031]",
+          "text": "The flush does not fade when the session ends. [sig_0029, sig_0151, sig_0008]",
           "label": "valid",
           "injection": null
         },
         {
           "id": "b4",
           "kind": "ad_copy",
-          "text": "Redness is the part people actually notice. [sig_0262]",
+          "text": "Redness is the part people actually notice. [sig_0312]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0262",
+            "bad_id": "sig_0312",
             "expected_reason": "OUT_OF_SET"
           }
         },
         {
           "id": "b5",
           "kind": "positioning",
-          "text": "Calm skin is the result being asked for, not clear skin. [sig_0025, sig_0066, sig_0021]",
+          "text": "Calm skin is the result being asked for, not clear skin. [sig_0025, sig_0066, sig_0033]",
           "label": "valid",
           "injection": null
         },
@@ -197,11 +197,11 @@
         "sig_0112",
         "sig_0103",
         "sig_0113",
-        "sig_0096",
         "sig_0115",
         "sig_0106",
         "sig_0118",
         "sig_0104",
+        "sig_0426",
         "sig_0100",
         "sig_0105",
         "sig_0116",
@@ -218,6 +218,7 @@
         "sig_0078",
         "sig_0067",
         "sig_0068",
+        "sig_0416",
         "sig_0060",
         "sig_0073",
         "sig_0076",
@@ -225,7 +226,6 @@
         "sig_0061",
         "sig_0071",
         "sig_0072",
-        "sig_0075",
         "sig_0246",
         "sig_0280",
         "sig_0261",
@@ -237,36 +237,36 @@
         {
           "id": "b0",
           "kind": "hook",
-          "text": "Reapplying is the step that never happens. [sig_0381]",
+          "text": "Reapplying is the step that never happens. [sig_0458]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0381",
+            "bad_id": "sig_0458",
             "expected_reason": "OUT_OF_SET"
           }
         },
         {
           "id": "b1",
           "kind": "ad_copy",
-          "text": "A white cast is a reason to skip protection entirely. [sig_0177, sig_0061]",
+          "text": "A white cast is a reason to skip protection entirely. [sig_0215, sig_0054]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0177",
+            "bad_id": "sig_0215",
             "expected_reason": "OUT_OF_SET"
           }
         },
         {
           "id": "b2",
           "kind": "positioning",
-          "text": "Sunscreen that stings the eyes gets left at home. [sig_0112, sig_0054]",
+          "text": "Sunscreen that stings the eyes gets left at home. [sig_0112, sig_0076]",
           "label": "valid",
           "injection": null
         },
         {
           "id": "b3",
           "kind": "hook",
-          "text": "Reapplying is the step that never happens. [sig_0096, sig_0116, sig_0072]",
+          "text": "Reapplying is the step that never happens. [sig_0115, sig_0116, sig_0071]",
           "label": "valid",
           "injection": null
         },
@@ -319,7 +319,7 @@
         {
           "id": "h3",
           "kind": "hook",
-          "text": "Reapplying is the step that never happens. [sig_0108, sig_0110, sig_0112, sig_0103, sig_0113, sig_0096, sig_0115, sig_0106, sig_0118, sig_0104]",
+          "text": "Reapplying is the step that never happens. [sig_0108, sig_0110, sig_0112, sig_0103, sig_0113, sig_0115, sig_0106, sig_0118, sig_0104, sig_0426]",
           "label": "valid",
           "injection": null,
           "variant": "wide_citation"
@@ -327,7 +327,7 @@
         {
           "id": "h4",
           "kind": "hook",
-          "text": "A white cast is a reason to skip protection entirely [sig_0096]",
+          "text": "A white cast is a reason to skip protection entirely [sig_0115]",
           "label": "valid",
           "injection": null,
           "variant": "no_terminator"
@@ -335,7 +335,7 @@
         {
           "id": "h5",
           "kind": "hook",
-          "text": "Dr. Idriss says reapplying is the step that never happens. [sig_0115]",
+          "text": "Dr. Idriss says reapplying is the step that never happens. [sig_0106]",
           "label": "valid",
           "injection": null,
           "variant": "abbreviation"
@@ -343,7 +343,7 @@
         {
           "id": "h6",
           "kind": "hook",
-          "text": "Reapplying is the step that never happens, e.g. after hot yoga. [sig_0106]",
+          "text": "Reapplying is the step that never happens, e.g. after hot yoga. [sig_0118]",
           "label": "valid",
           "injection": null,
           "variant": "inline_eg"
@@ -351,7 +351,7 @@
         {
           "id": "h7",
           "kind": "hook",
-          "text": "One reviewer put it plainly: \"It stings.\" A white cast is a reason to skip protection entirely. [sig_0118]",
+          "text": "One reviewer put it plainly: \"It stings.\" A white cast is a reason to skip protection entirely. [sig_0104]",
           "label": "valid",
           "injection": null,
           "variant": "quotation"
@@ -359,7 +359,7 @@
         {
           "id": "h8",
           "kind": "hook",
-          "text": "Reapplying is the step that never happens... and nobody warns you. [sig_0104]",
+          "text": "Reapplying is the step that never happens... and nobody warns you. [sig_0426]",
           "label": "valid",
           "injection": null,
           "variant": "inline_ellipsis"
@@ -559,7 +559,6 @@
       "query": null,
       "evidence_ids": [
         "sig_0353",
-        "sig_0337",
         "sig_0340",
         "sig_0347",
         "sig_0348",
@@ -571,7 +570,6 @@
         "sig_0357",
         "sig_0360",
         "sig_0345",
-        "sig_0329",
         "sig_0354",
         "sig_0339",
         "sig_0358",
@@ -579,6 +577,8 @@
         "sig_0351",
         "sig_0322",
         "sig_0359",
+        "sig_0341",
+        "sig_0342",
         "sig_0398",
         "sig_0380",
         "sig_0386",
@@ -588,10 +588,10 @@
         "sig_0396",
         "sig_0393",
         "sig_0391",
-        "sig_0369",
-        "sig_0376",
+        "sig_0460",
         "sig_0384",
         "sig_0381",
+        "sig_0459",
         "sig_0246",
         "sig_0280",
         "sig_0261",
@@ -610,18 +610,18 @@
         {
           "id": "b1",
           "kind": "ad_copy",
-          "text": "Dupes are searched for before the original is bought. [sig_0310]",
+          "text": "Dupes are searched for before the original is bought. [sig_0407]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0310",
+            "bad_id": "sig_0407",
             "expected_reason": "OUT_OF_SET"
           }
         },
         {
           "id": "b2",
           "kind": "positioning",
-          "text": "Value is judged per use, not per bottle. [sig_0353, sig_0350, sig_0369]",
+          "text": "Value is judged per use, not per bottle. [sig_0353, sig_0322, sig_0460]",
           "label": "valid",
           "injection": null
         },
@@ -639,18 +639,18 @@
         {
           "id": "b4",
           "kind": "ad_copy",
-          "text": "Dupes are searched for before the original is bought. [sig_0246, sig_0358, sig_0344]",
+          "text": "Dupes are searched for before the original is bought. [sig_0246, sig_0351, sig_0357]",
           "label": "valid",
           "injection": null
         },
         {
           "id": "b5",
           "kind": "positioning",
-          "text": "Value is judged per use, not per bottle. [sig_0231, sig_0344, sig_0340]",
+          "text": "Value is judged per use, not per bottle. [sig_0286, sig_0357, sig_0347]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0231",
+            "bad_id": "sig_0286",
             "expected_reason": "OUT_OF_SET"
           }
         },
@@ -665,7 +665,7 @@
         {
           "id": "h1",
           "kind": "hook",
-          "text": "Dupes are searched for before the original is bought in 2.5 hours, not eight. [sig_0337]",
+          "text": "Dupes are searched for before the original is bought in 2.5 hours, not eight. [sig_0340]",
           "label": "valid",
           "injection": null,
           "variant": "decimal"
@@ -673,7 +673,7 @@
         {
           "id": "h2",
           "kind": "hook",
-          "text": "The expensive option is assumed to be the same formula. [sig_0340] Dupes are searched for before the original is bought. [sig_0347, sig_0348]",
+          "text": "The expensive option is assumed to be the same formula. [sig_0347] Dupes are searched for before the original is bought. [sig_0348, sig_0338]",
           "label": "valid",
           "injection": null,
           "variant": "multi_sentence"
@@ -681,7 +681,7 @@
         {
           "id": "h3",
           "kind": "hook",
-          "text": "The expensive option is assumed to be the same formula. [sig_0353, sig_0337, sig_0340, sig_0347, sig_0348, sig_0338, sig_0343, sig_0349, sig_0356, sig_0344]",
+          "text": "The expensive option is assumed to be the same formula. [sig_0353, sig_0340, sig_0347, sig_0348, sig_0338, sig_0343, sig_0349, sig_0356, sig_0344, sig_0357]",
           "label": "valid",
           "injection": null,
           "variant": "wide_citation"
@@ -689,7 +689,7 @@
         {
           "id": "h4",
           "kind": "hook",
-          "text": "Dupes are searched for before the original is bought [sig_0338]",
+          "text": "Dupes are searched for before the original is bought [sig_0343]",
           "label": "valid",
           "injection": null,
           "variant": "no_terminator"
@@ -697,7 +697,7 @@
         {
           "id": "h5",
           "kind": "hook",
-          "text": "Dr. Idriss says the expensive option is assumed to be the same formula. [sig_0343]",
+          "text": "Dr. Idriss says the expensive option is assumed to be the same formula. [sig_0349]",
           "label": "valid",
           "injection": null,
           "variant": "abbreviation"
@@ -705,7 +705,7 @@
         {
           "id": "h6",
           "kind": "hook",
-          "text": "The expensive option is assumed to be the same formula, e.g. after hot yoga. [sig_0349]",
+          "text": "The expensive option is assumed to be the same formula, e.g. after hot yoga. [sig_0356]",
           "label": "valid",
           "injection": null,
           "variant": "inline_eg"
@@ -713,7 +713,7 @@
         {
           "id": "h7",
           "kind": "hook",
-          "text": "One reviewer put it plainly: \"It stings.\" Dupes are searched for before the original is bought. [sig_0356]",
+          "text": "One reviewer put it plainly: \"It stings.\" Dupes are searched for before the original is bought. [sig_0344]",
           "label": "valid",
           "injection": null,
           "variant": "quotation"
@@ -721,7 +721,7 @@
         {
           "id": "h8",
           "kind": "hook",
-          "text": "The expensive option is assumed to be the same formula... and nobody warns you. [sig_0344]",
+          "text": "The expensive option is assumed to be the same formula... and nobody warns you. [sig_0357]",
           "label": "valid",
           "injection": null,
           "variant": "inline_ellipsis"
@@ -729,7 +729,7 @@
         {
           "id": "h9",
           "kind": "hook",
-          "text": "SPF 50. Dupes are searched for before the original is bought. [sig_0357]",
+          "text": "SPF 50. Dupes are searched for before the original is bought. [sig_0360]",
           "label": "valid",
           "injection": null,
           "variant": "spf_number"
@@ -742,10 +742,10 @@
       "query": null,
       "evidence_ids": [
         "sig_0301",
-        "sig_0287",
         "sig_0300",
         "sig_0299",
         "sig_0311",
+        "sig_0483",
         "sig_0304",
         "sig_0317",
         "sig_0306",
@@ -804,11 +804,11 @@
         {
           "id": "b2",
           "kind": "positioning",
-          "text": "A strong smell is a reason to return it. [sig_0399, sig_0315]",
+          "text": "A strong smell is a reason to return it. [sig_0481, sig_0315]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0399",
+            "bad_id": "sig_0481",
             "expected_reason": "OUT_OF_SET"
           }
         },
@@ -848,7 +848,7 @@
         {
           "id": "h1",
           "kind": "hook",
-          "text": "Fragrance-free is checked before the ingredient list in 2.5 hours, not eight. [sig_0287]",
+          "text": "Fragrance-free is checked before the ingredient list in 2.5 hours, not eight. [sig_0300]",
           "label": "valid",
           "injection": null,
           "variant": "decimal"
@@ -856,7 +856,7 @@
         {
           "id": "h2",
           "kind": "hook",
-          "text": "Scent reads as something to hide behind. [sig_0300] Fragrance-free is checked before the ingredient list. [sig_0299, sig_0311]",
+          "text": "Scent reads as something to hide behind. [sig_0299] Fragrance-free is checked before the ingredient list. [sig_0311, sig_0483]",
           "label": "valid",
           "injection": null,
           "variant": "multi_sentence"
@@ -864,7 +864,7 @@
         {
           "id": "h3",
           "kind": "hook",
-          "text": "Scent reads as something to hide behind. [sig_0301, sig_0287, sig_0300, sig_0299, sig_0311, sig_0304, sig_0317, sig_0306, sig_0314, sig_0285]",
+          "text": "Scent reads as something to hide behind. [sig_0301, sig_0300, sig_0299, sig_0311, sig_0483, sig_0304, sig_0317, sig_0306, sig_0314, sig_0285]",
           "label": "valid",
           "injection": null,
           "variant": "wide_citation"
@@ -941,11 +941,12 @@
         "sig_0137",
         "sig_0138",
         "sig_0129",
-        "sig_0130",
         "sig_0133",
-        "sig_0134",
         "sig_0036",
+        "sig_0406",
         "sig_0156",
+        "sig_0154",
+        "sig_0144",
         "sig_0040",
         "sig_0037",
         "sig_0030",
@@ -957,13 +958,12 @@
         "sig_0020",
         "sig_0019",
         "sig_0025",
-        "sig_0029",
         "sig_0066",
         "sig_0065",
         "sig_0078",
         "sig_0067",
         "sig_0068",
-        "sig_0060"
+        "sig_0416"
       ],
       "blocks": [
         {
@@ -987,11 +987,11 @@
         {
           "id": "b2",
           "kind": "positioning",
-          "text": "Sensitive skin has learned to expect a trade-off. [sig_0387, sig_0029]",
+          "text": "Sensitive skin has learned to expect a trade-off. [sig_0464, sig_0025]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0387",
+            "bad_id": "sig_0464",
             "expected_reason": "OUT_OF_SET"
           }
         },
@@ -1005,18 +1005,18 @@
         {
           "id": "b4",
           "kind": "ad_copy",
-          "text": "Stinging is read as the product working, and it is not. [sig_0350]",
+          "text": "Stinging is read as the product working, and it is not. [sig_0418]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0350",
+            "bad_id": "sig_0418",
             "expected_reason": "OUT_OF_SET"
           }
         },
         {
           "id": "b5",
           "kind": "positioning",
-          "text": "Sensitive skin has learned to expect a trade-off. [sig_0060]",
+          "text": "Sensitive skin has learned to expect a trade-off. [sig_0416]",
           "label": "valid",
           "injection": null
         },
@@ -1115,11 +1115,11 @@
         "sig_0103",
         "sig_0113",
         "sig_0259",
-        "sig_0096",
         "sig_0115",
         "sig_0106",
         "sig_0118",
         "sig_0104",
+        "sig_0426",
         "sig_0100",
         "sig_0105",
         "sig_0116",
@@ -1136,6 +1136,7 @@
         "sig_0078",
         "sig_0067",
         "sig_0068",
+        "sig_0416",
         "sig_0060",
         "sig_0073",
         "sig_0076",
@@ -1143,7 +1144,6 @@
         "sig_0061",
         "sig_0071",
         "sig_0072",
-        "sig_0075",
         "sig_0246",
         "sig_0280",
         "sig_0261"
@@ -1152,7 +1152,7 @@
         {
           "id": "b0",
           "kind": "hook",
-          "text": "Reapplying is the step that never happens. [sig_0112, sig_0075]",
+          "text": "Reapplying is the step that never happens. [sig_0112, sig_0072]",
           "label": "valid",
           "injection": null
         },
@@ -1166,40 +1166,40 @@
         {
           "id": "b2",
           "kind": "positioning",
-          "text": "Sunscreen that stings the eyes gets left at home. [sig_0072]",
+          "text": "Sunscreen that stings the eyes gets left at home. [sig_0071]",
           "label": "valid",
           "injection": null
         },
         {
           "id": "b3",
           "kind": "hook",
-          "text": "Reapplying is the step that never happens. [sig_0145, sig_0065]",
+          "text": "Reapplying is the step that never happens. [sig_0179, sig_0065]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0145",
+            "bad_id": "sig_0179",
             "expected_reason": "OUT_OF_SET"
           }
         },
         {
           "id": "b4",
           "kind": "ad_copy",
-          "text": "A white cast is a reason to skip protection entirely. [sig_0328]",
+          "text": "A white cast is a reason to skip protection entirely. [sig_0389]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0328",
+            "bad_id": "sig_0389",
             "expected_reason": "OUT_OF_SET"
           }
         },
         {
           "id": "b5",
           "kind": "positioning",
-          "text": "Sunscreen that stings the eyes gets left at home. [sig_0077]",
+          "text": "Sunscreen that stings the eyes gets left at home. [sig_0123]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0077",
+            "bad_id": "sig_0123",
             "expected_reason": "OUT_OF_SET"
           }
         },
@@ -1230,7 +1230,7 @@
         {
           "id": "h3",
           "kind": "hook",
-          "text": "Reapplying is the step that never happens. [sig_0107, sig_0093, sig_0108, sig_0110, sig_0112, sig_0103, sig_0113, sig_0259, sig_0096, sig_0115]",
+          "text": "Reapplying is the step that never happens. [sig_0107, sig_0093, sig_0108, sig_0110, sig_0112, sig_0103, sig_0113, sig_0259, sig_0115, sig_0106]",
           "label": "valid",
           "injection": null,
           "variant": "wide_citation"
@@ -1262,7 +1262,7 @@
         {
           "id": "h7",
           "kind": "hook",
-          "text": "One reviewer put it plainly: \"It stings.\" A white cast is a reason to skip protection entirely. [sig_0096]",
+          "text": "One reviewer put it plainly: \"It stings.\" A white cast is a reason to skip protection entirely. [sig_0115]",
           "label": "valid",
           "injection": null,
           "variant": "quotation"
@@ -1270,7 +1270,7 @@
         {
           "id": "h8",
           "kind": "hook",
-          "text": "Reapplying is the step that never happens... and nobody warns you. [sig_0115]",
+          "text": "Reapplying is the step that never happens... and nobody warns you. [sig_0106]",
           "label": "valid",
           "injection": null,
           "variant": "inline_ellipsis"
@@ -1278,7 +1278,7 @@
         {
           "id": "h9",
           "kind": "hook",
-          "text": "SPF 50. A white cast is a reason to skip protection entirely. [sig_0106]",
+          "text": "SPF 50. A white cast is a reason to skip protection entirely. [sig_0118]",
           "label": "valid",
           "injection": null,
           "variant": "spf_number"
@@ -1307,14 +1307,15 @@
         "sig_0032",
         "sig_0036",
         "sig_0027",
+        "sig_0405",
         "sig_0003",
-        "sig_0004",
+        "sig_0406",
         "sig_0006",
-        "sig_0005",
         "sig_0144",
         "sig_0139",
         "sig_0143",
         "sig_0129",
+        "sig_0429",
         "sig_0187",
         "sig_0151",
         "sig_0156",
@@ -1324,7 +1325,6 @@
         "sig_0142",
         "sig_0152",
         "sig_0135",
-        "sig_0141",
         "sig_0181",
         "sig_0199",
         "sig_0198",
@@ -1342,7 +1342,7 @@
         {
           "id": "b1",
           "kind": "ad_copy",
-          "text": "Redness is the part people actually notice. [sig_0135, sig_0143, sig_0139]",
+          "text": "Redness is the part people actually notice. [sig_0152, sig_0143, sig_0139]",
           "label": "valid",
           "injection": null
         },
@@ -1360,11 +1360,11 @@
         {
           "id": "b3",
           "kind": "hook",
-          "text": "The flush does not fade when the session ends. [sig_0256]",
+          "text": "The flush does not fade when the session ends. [sig_0305]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0256",
+            "bad_id": "sig_0305",
             "expected_reason": "OUT_OF_SET"
           }
         },
@@ -1378,7 +1378,7 @@
         {
           "id": "b5",
           "kind": "positioning",
-          "text": "Calm skin is the result being asked for, not clear skin. [sig_0003]",
+          "text": "Calm skin is the result being asked for, not clear skin. [sig_0405]",
           "label": "valid",
           "injection": null
         },
@@ -1470,7 +1470,6 @@
       "query": "focus on texture",
       "evidence_ids": [
         "sig_0353",
-        "sig_0337",
         "sig_0340",
         "sig_0347",
         "sig_0348",
@@ -1483,7 +1482,6 @@
         "sig_0357",
         "sig_0360",
         "sig_0345",
-        "sig_0329",
         "sig_0354",
         "sig_0339",
         "sig_0358",
@@ -1491,6 +1489,8 @@
         "sig_0351",
         "sig_0322",
         "sig_0359",
+        "sig_0341",
+        "sig_0342",
         "sig_0266",
         "sig_0274",
         "sig_0398",
@@ -1502,10 +1502,10 @@
         "sig_0396",
         "sig_0393",
         "sig_0391",
-        "sig_0369",
-        "sig_0376",
+        "sig_0460",
         "sig_0384",
         "sig_0381",
+        "sig_0459",
         "sig_0246",
         "sig_0280",
         "sig_0261"
@@ -1514,7 +1514,7 @@
         {
           "id": "b0",
           "kind": "hook",
-          "text": "The expensive option is assumed to be the same formula. [sig_1126, sig_0338]",
+          "text": "The expensive option is assumed to be the same formula. [sig_1126, sig_0343]",
           "label": "injected",
           "injection": {
             "type": "hallucinated_id",
@@ -1525,21 +1525,21 @@
         {
           "id": "b1",
           "kind": "ad_copy",
-          "text": "Dupes are searched for before the original is bought. [sig_0384, sig_0345, sig_0386]",
+          "text": "Dupes are searched for before the original is bought. [sig_0381, sig_0354, sig_0386]",
           "label": "valid",
           "injection": null
         },
         {
           "id": "b2",
           "kind": "positioning",
-          "text": "Value is judged per use, not per bottle. [sig_0393, sig_0357, sig_0338]",
+          "text": "Value is judged per use, not per bottle. [sig_0393, sig_0360, sig_0343]",
           "label": "valid",
           "injection": null
         },
         {
           "id": "b3",
           "kind": "hook",
-          "text": "The expensive option is assumed to be the same formula. [sig_6739, sig_0340]",
+          "text": "The expensive option is assumed to be the same formula. [sig_6739, sig_0347]",
           "label": "injected",
           "injection": {
             "type": "hallucinated_id",
@@ -1550,18 +1550,18 @@
         {
           "id": "b4",
           "kind": "ad_copy",
-          "text": "Dupes are searched for before the original is bought. [sig_0349, sig_0348, sig_0358]",
+          "text": "Dupes are searched for before the original is bought. [sig_0356, sig_0338, sig_0351]",
           "label": "valid",
           "injection": null
         },
         {
           "id": "b5",
           "kind": "positioning",
-          "text": "Value is judged per use, not per bottle. [sig_0008, sig_0357, sig_0382]",
+          "text": "Value is judged per use, not per bottle. [sig_0013, sig_0360, sig_0382]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0008",
+            "bad_id": "sig_0013",
             "expected_reason": "OUT_OF_SET"
           }
         },
@@ -1576,7 +1576,7 @@
         {
           "id": "h1",
           "kind": "hook",
-          "text": "Dupes are searched for before the original is bought in 2.5 hours, not eight. [sig_0337]",
+          "text": "Dupes are searched for before the original is bought in 2.5 hours, not eight. [sig_0340]",
           "label": "valid",
           "injection": null,
           "variant": "decimal"
@@ -1584,7 +1584,7 @@
         {
           "id": "h2",
           "kind": "hook",
-          "text": "The expensive option is assumed to be the same formula. [sig_0340] Dupes are searched for before the original is bought. [sig_0347, sig_0348]",
+          "text": "The expensive option is assumed to be the same formula. [sig_0347] Dupes are searched for before the original is bought. [sig_0348, sig_0338]",
           "label": "valid",
           "injection": null,
           "variant": "multi_sentence"
@@ -1592,7 +1592,7 @@
         {
           "id": "h3",
           "kind": "hook",
-          "text": "The expensive option is assumed to be the same formula. [sig_0353, sig_0337, sig_0340, sig_0347, sig_0348, sig_0338, sig_0343, sig_0259, sig_0349, sig_0356]",
+          "text": "The expensive option is assumed to be the same formula. [sig_0353, sig_0340, sig_0347, sig_0348, sig_0338, sig_0343, sig_0259, sig_0349, sig_0356, sig_0344]",
           "label": "valid",
           "injection": null,
           "variant": "wide_citation"
@@ -1600,7 +1600,7 @@
         {
           "id": "h4",
           "kind": "hook",
-          "text": "Dupes are searched for before the original is bought [sig_0338]",
+          "text": "Dupes are searched for before the original is bought [sig_0343]",
           "label": "valid",
           "injection": null,
           "variant": "no_terminator"
@@ -1608,7 +1608,7 @@
         {
           "id": "h5",
           "kind": "hook",
-          "text": "Dr. Idriss says the expensive option is assumed to be the same formula. [sig_0343]",
+          "text": "Dr. Idriss says the expensive option is assumed to be the same formula. [sig_0259]",
           "label": "valid",
           "injection": null,
           "variant": "abbreviation"
@@ -1616,7 +1616,7 @@
         {
           "id": "h6",
           "kind": "hook",
-          "text": "The expensive option is assumed to be the same formula, e.g. after hot yoga. [sig_0259]",
+          "text": "The expensive option is assumed to be the same formula, e.g. after hot yoga. [sig_0349]",
           "label": "valid",
           "injection": null,
           "variant": "inline_eg"
@@ -1624,7 +1624,7 @@
         {
           "id": "h7",
           "kind": "hook",
-          "text": "One reviewer put it plainly: \"It stings.\" Dupes are searched for before the original is bought. [sig_0349]",
+          "text": "One reviewer put it plainly: \"It stings.\" Dupes are searched for before the original is bought. [sig_0356]",
           "label": "valid",
           "injection": null,
           "variant": "quotation"
@@ -1632,7 +1632,7 @@
         {
           "id": "h8",
           "kind": "hook",
-          "text": "The expensive option is assumed to be the same formula... and nobody warns you. [sig_0356]",
+          "text": "The expensive option is assumed to be the same formula... and nobody warns you. [sig_0344]",
           "label": "valid",
           "injection": null,
           "variant": "inline_ellipsis"
@@ -1640,7 +1640,7 @@
         {
           "id": "h9",
           "kind": "hook",
-          "text": "SPF 50. Dupes are searched for before the original is bought. [sig_0344]",
+          "text": "SPF 50. Dupes are searched for before the original is bought. [sig_0357]",
           "label": "valid",
           "injection": null,
           "variant": "spf_number"
@@ -1662,9 +1662,9 @@
         "sig_0226",
         "sig_0222",
         "sig_0223",
-        "sig_0217",
         "sig_0201",
         "sig_0207",
+        "sig_0480",
         "sig_0221",
         "sig_0228",
         "sig_0213",
@@ -1672,12 +1672,12 @@
         "sig_0231",
         "sig_0233",
         "sig_0211",
-        "sig_0214",
+        "sig_0438",
         "sig_0301",
-        "sig_0287",
         "sig_0300",
         "sig_0299",
         "sig_0311",
+        "sig_0483",
         "sig_0304",
         "sig_0317",
         "sig_0306",
@@ -1697,11 +1697,11 @@
         {
           "id": "b0",
           "kind": "hook",
-          "text": "Dry and tight is the default state by evening. [sig_0122, sig_0317, sig_0232]",
+          "text": "Dry and tight is the default state by evening. [sig_0157, sig_0317, sig_0232]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0122",
+            "bad_id": "sig_0157",
             "expected_reason": "OUT_OF_SET"
           }
         },
@@ -1722,7 +1722,7 @@
         {
           "id": "b3",
           "kind": "hook",
-          "text": "Dry and tight is the default state by evening. [sig_2912, sig_0285, sig_0311]",
+          "text": "Dry and tight is the default state by evening. [sig_2912, sig_0285, sig_0483]",
           "label": "injected",
           "injection": {
             "type": "hallucinated_id",
@@ -1744,11 +1744,11 @@
         {
           "id": "b5",
           "kind": "positioning",
-          "text": "Hydration is judged by how skin feels at hour eight. [sig_0179, sig_0151, sig_0287]",
+          "text": "Hydration is judged by how skin feels at hour eight. [sig_0239, sig_0151, sig_0300]",
           "label": "injected",
           "injection": {
             "type": "out_of_set_id",
-            "bad_id": "sig_0179",
+            "bad_id": "sig_0239",
             "expected_reason": "OUT_OF_SET"
           }
         },
@@ -1827,7 +1827,7 @@
         {
           "id": "h9",
           "kind": "hook",
-          "text": "SPF 50. Flaking makes every other step look worse. [sig_0217]",
+          "text": "SPF 50. Flaking makes every other step look worse. [sig_0201]",
           "label": "valid",
           "injection": null,
           "variant": "spf_number"

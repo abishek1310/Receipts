@@ -88,15 +88,27 @@ silence.
 **Real public data only.** No synthetic comments — the realism of the evidence
 layer is the credibility of the demo.
 
-- **400 signals**, one narrow category (skincare), frozen IDs `sig_0001`–`sig_0400`
-- **220 Reddit comments** from r/SkincareAddiction, via the public
+- **400 signals**, one narrow category (skincare), IDs frozen in `data/id_ledger.json`
+- **224 Reddit comments** from r/SkincareAddiction, via the public
   [`HuggingFaceGECLM/REDDIT_comments`](https://huggingface.co/datasets/HuggingFaceGECLM/REDDIT_comments)
   dump. Permalinks are reconstructed from `link_id` + comment `id`, so every URL
   resolves to the original comment.
-- **180 Amazon reviews** from
+- **176 Amazon reviews** from
   [`McAuley-Lab/Amazon-Reviews-2023`](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023)
   (All_Beauty), filtered to skincare products by their real titles.
 - Spread evenly across 10 themes; mostly 2021–2023.
+
+**Every URL resolves, and that took work.** §5.1 says a judge will click one, so
+we checked. The Amazon dump is a 2023 snapshot and products get delisted: **31%
+of the ASINs the first build selected already 404'd.** All 152 ASINs now in the
+corpus have been loaded in a real browser and confirmed live; 69 dead ones are
+denylisted in `data/dead_asins.json`. The check cannot be done with curl —
+Amazon serves an identical 3,790-byte bot-block page for live and dead ASINs
+alike, so a shell check reports everything healthy. The procedure, and when to
+re-run it, is in `scripts/check_amazon_urls.md`.
+
+Reddit permalinks need no such check: comment URLs are permanent, and a deleted
+comment still resolves to its thread.
 
 Nothing is truncated. The spec permits cutting at 400 characters, but a comment
 chopped mid-sentence reads like fabricated data to anyone who opens the expander,
