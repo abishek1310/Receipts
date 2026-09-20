@@ -52,6 +52,16 @@ _TAG_STRICT = re.compile(r"^\[sig_\d{4}(?:,\s*sig_\d{4})*\]$")
 # A tag that is present but carries no IDs: [] or [   ]
 _TAG_EMPTY = re.compile(r"^\[\s*\]$")
 
+# The tag written *inside* the sentence, before its full stop:
+#     "Your gym glow shouldn't last three hours [sig_0183]."
+# §6.1's example puts the tag after the stop, but models overwhelmingly write it
+# before — it is the ordinary academic convention. Both bind the tag to exactly
+# one sentence, so accepting both is a parser concession, not a loosening of §1:
+# every ID is still checked against the evidence set in exactly the same way.
+_TAG_BEFORE_TERMINATOR = re.compile(
+    r"^(?P<head>.*?)\s*(?P<tag>\[[^\[\]]*\])(?P<term>[.!?…]+)$", re.S
+)
+
 # Pull IDs out of a tag already known to be strictly shaped.
 _ID_IN_TAG = re.compile(r"sig_\d{4}")
 
@@ -198,6 +208,11 @@ def split_sentences(text: str) -> list[Sentence]:
             end = m.end()
 
         body = text[start:j].strip()
+        if tag is None and body:
+            inner = _TAG_BEFORE_TERMINATOR.match(body)
+            if inner:
+                tag = inner.group("tag")
+                body = f"{inner.group('head')}{inner.group('term')}".strip()
         if body:
             sentences.append(Sentence(body=body, tag=tag))
         i = end

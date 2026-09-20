@@ -22,6 +22,7 @@ Two notes on the stack, both deliberate departures worth knowing about:
 from __future__ import annotations
 
 import json
+import time
 from dataclasses import dataclass
 from typing import Any, Protocol, Sequence
 
@@ -246,18 +247,32 @@ class GeminiClient:
             config["response_mime_type"] = "application/json"
             config["response_json_schema"] = json_schema
 
-        try:
-            response = self._client.models.generate_content(
-                model=self._settings.gemini_model,
-                contents=user,
-                config=types.GenerateContentConfig(**config),
-            )
-        except self._errors.ClientError as exc:
-            raise LLMError(f"Gemini rejected the request: {exc}") from exc
-        except self._errors.ServerError as exc:
-            raise LLMError(f"Gemini server error: {exc}") from exc
-        except self._errors.APIError as exc:
-            raise LLMError(f"Gemini API error: {exc}") from exc
+        # The free tier returns 503 "high demand" often enough that an unhandled
+        # one would land mid-demo. Retry the transient codes with backoff; let
+        # everything else fail immediately, since a 400 will not fix itself.
+        attempts = self._settings.provider_retries + 1
+        last: Exception | None = None
+        for attempt in range(attempts):
+            try:
+                response = self._client.models.generate_content(
+                    model=self._settings.gemini_model,
+                    contents=user,
+                    config=types.GenerateContentConfig(**config),
+                )
+                break
+            except self._errors.ClientError as exc:
+                if getattr(exc, "code", None) != 429:
+                    raise LLMError(f"Gemini rejected the request: {exc}") from exc
+                last = exc
+            except self._errors.ServerError as exc:
+                last = exc
+            except self._errors.APIError as exc:
+                raise LLMError(f"Gemini API error: {exc}") from exc
+
+            if attempt < attempts - 1:
+                time.sleep(2.0 * (2**attempt))
+        else:
+            raise LLMError(f"Gemini unavailable after {attempts} attempts: {last}")
 
         text = response.text or ""
         if not text.strip():

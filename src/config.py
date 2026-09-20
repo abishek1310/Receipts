@@ -34,7 +34,7 @@ class Settings(BaseSettings):
 
     anthropic_model: str = "claude-opus-5"
     openai_model: str = "gpt-4o"
-    gemini_model: str = "gemini-flash-latest"
+    gemini_model: str = "gemini-3.5-flash"
 
     # Gemini 2.5 thinks by default and thinking tokens come out of the output
     # allowance, which can return an empty body. 0 disables it; raise it if
@@ -52,6 +52,10 @@ class Settings(BaseSettings):
     effort: Literal["low", "medium", "high", "xhigh", "max"] = "medium"
 
     max_tokens: int = 4000
+
+    # Transient-failure retries at the provider layer (503 / 429). Distinct from
+    # max_retries, which is the §6.3 citation-regeneration budget.
+    provider_retries: int = Field(default=3, ge=0, le=6)
 
     # --- retrieval ----------------------------------------------------------------
     retrieval_k: int = Field(default=40, ge=5, le=200)

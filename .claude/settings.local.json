@@ -52,7 +52,10 @@
       "Bash(curl -s -o /dev/null -w \"streamlit still up: http=%{http_code}\\\\n\" http://localhost:8599/ --max-time 8)",
       "Bash(.venv/Scripts/python.exe -m pip install -q google-genai)",
       "Bash(sed -i 's|^## Two deliberate departures from the spec$|## Three deliberate departures from the spec|' README.md)",
-      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'feat: add Gemini provider behind the existing adapter *)"
+      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'feat: add Gemini provider behind the existing adapter *)",
+      "Bash(git check-ignore *)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/demo_run.py --insight ins_01)",
+      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'fix: accept citation tags before the full stop; capture first real failure *)"
     ]
   }
 }

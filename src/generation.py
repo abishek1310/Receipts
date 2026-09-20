@@ -92,12 +92,20 @@ RULES — these are enforced by a validator that runs on your output. A block th
 breaks any of them is rejected and you are asked to write it again.
 
 1. Use ONLY the signals listed above. They are the entire evidence base.
-2. Every sentence that makes a claim must end with a citation tag naming the
+2. EVERY sentence that makes a claim must carry its own citation tag naming the
    signals that support it, in exactly this shape:
 
-       Your gym glow shouldn't last three hours. [sig_0183, sig_0241]
+       Your gym glow shouldn't last three hours [sig_0183, sig_0241].
 
-   Square brackets, IDs separated by ", ", nothing else inside the brackets.
+   Square brackets, four-digit IDs, separated by ", ", nothing else inside the
+   brackets. A tag before or after the full stop is fine; what is not fine is a
+   claim-bearing sentence with no tag of its own. If a block has three
+   sentences, it needs three tags:
+
+       Redness outlasts the workout [sig_0183]. Cooling gels sting broken skin
+       [sig_0241]. Nothing on the shelf is built for this [sig_0319].
+
+   A tag at the end of a paragraph does not cover the sentences before it.
 3. Cite only IDs printed in the evidence block above. Do not write an ID you have
    not been given, do not adjust one, and do not reuse an ID from earlier in this
    conversation — the evidence for this request is only what is listed above.

@@ -60,6 +60,40 @@ def test_multi_sentence_block_all_cited_passes():
     assert set(r.cited_ids) == EVIDENCE
 
 
+def test_tag_before_the_full_stop_passes():
+    # The ordinary academic convention, and what models actually write. §6.1's
+    # example puts the tag after the stop; both bind to exactly one sentence.
+    r = validate_block(block("Your gym glow shouldn't last three hours [sig_0001]."), EVIDENCE, CORPUS)
+    assert r.status == "PASS"
+    assert r.cited_ids == ["sig_0001"]
+
+
+def test_tag_before_a_question_mark_passes():
+    r = validate_block(block("Still burning hours later [sig_0001, sig_0002]?"), EVIDENCE, CORPUS)
+    assert r.status == "PASS"
+
+
+def test_mixed_tag_placement_within_one_block_passes():
+    text = "Redness outlasts the workout [sig_0001]. Cooling gels sting. [sig_0002]"
+    assert validate_block(block(text), EVIDENCE, CORPUS).status == "PASS"
+
+
+def test_a_bad_id_before_the_full_stop_is_still_caught():
+    # The placement concession must not become a hole in the check.
+    r = validate_block(block("Skin recovers in minutes [sig_9999]."), EVIDENCE, CORPUS)
+    assert r.status == "FAIL"
+    assert r.reason is FailureReason.UNKNOWN_ID
+
+
+def test_one_trailing_tag_does_not_cover_earlier_sentences():
+    # The failure mode that produced a 6/6 rejection on the first live run: a
+    # paragraph-final tag leaves the sentences before it uncited.
+    text = "Redness outlasts the workout. Cooling gels sting broken skin [sig_0001]."
+    r = validate_block(block(text), EVIDENCE, CORPUS)
+    assert r.status == "FAIL"
+    assert r.reason is FailureReason.UNPARSEABLE
+
+
 def test_hook_without_terminal_punctuation_passes():
     r = validate_block(block("Gym glow, not gym rash [sig_0002]"), EVIDENCE, CORPUS)
     assert r.status == "PASS"

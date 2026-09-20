@@ -27,4 +27,12 @@ This is the trade we chose. The sentence splitter errs toward splitting, and an 
 
 ## Naturally occurring failure (from the live rejection log)
 
-_No rejections logged yet._ Run the app or `scripts/demo_run.py` against a real model first — §11 requires the demo's rejection moment to use a genuine failure, not one engineered to fail.
+- Reason: `UNPARSEABLE`
+- Offending IDs: `—`
+- Insight: `ins_02`, attempt 1
+
+Model output, verbatim:
+
+> Designed specifically for outdoor and endurance athletes aged 20-40 who refuse to let their sun care compromise their performance. While traditional sunscreens run into the eyes, feel heavy and greasy, and require constant, messy reapplication during activity, this formula wins by delivering high SPF 50+ protection in an ultra-lightweight, fast-absorbing gel that resists sweat and never stings [sig_0073, sig_0116, sig_0265, sig_0277].
+
+No valid citation tag on a claim-bearing sentence: 'Designed specifically for outdoor and endurance athletes aged 20-40 who refuse to let t...'
