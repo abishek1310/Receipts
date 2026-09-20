@@ -1,0 +1,43 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"https://www.reddit.com/r/SkincareAddiction/top.json?t=year&limit=1\" -Headers @{\"User-Agent\"=\"receipts-ingest/0.1\"} -TimeoutSec 20; \"reddit: $\\($r.StatusCode\\) len=$\\($r.Content.Length\\)\" } catch { \"reddit FAILED: $\\($_.Exception.Message\\)\" })",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0 Safari/537.36\" \"https://old.reddit.com/r/SkincareAddiction/top.json?t=year&limit=2\" --max-time 25)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"https://huggingface.co/api/datasets/McAuley-Lab/Amazon-Reviews-2023\" --max-time 25)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"https://pypi.org/simple/\" --max-time 25)",
+      "Bash(curl -sL -o /tmp/r1.json -w '%{http_code} %{size_download}\\\\n' -A 'Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36' 'https://old.reddit.com/r/SkincareAddiction/top.json?t=year&limit=2' --max-time 25)",
+      "Read(//tmp/**)",
+      "Bash(curl -sL -o /tmp/r2.json -w '%{http_code} %{size_download}\\\\n' -A 'Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36' 'https://www.reddit.com/r/SkincareAddiction/top.json?t=year&limit=2' --max-time 25)",
+      "Bash(curl -s \"https://huggingface.co/api/datasets?search=skincare&limit=20\" --max-time 30)",
+      "Bash(python -c \"import json,sys; [print\\(d['id'], d.get\\('downloads',0\\)\\) for d in json.load\\(sys.stdin\\)]\")",
+      "Bash(curl -s \"https://huggingface.co/api/datasets?search=reddit&limit=40\" --max-time 30)",
+      "Bash(curl -s \"https://datasets-server.huggingface.co/splits?dataset=DataDump1%2FSkincareAddiction_reddit\" --max-time 30)",
+      "Bash(curl -s \"https://datasets-server.huggingface.co/first-rows?dataset=DataDump1%2FSkincareAddiction_reddit&config=default&split=train\" --max-time 40)",
+      "Bash(curl -s \"https://datasets-server.huggingface.co/splits?dataset=McAuley-Lab%2FAmazon-Reviews-2023\" --max-time 40)",
+      "Bash(python -c ' *)",
+      "Bash(curl -s \"https://huggingface.co/api/datasets/McAuley-Lab/Amazon-Reviews-2023/tree/main/raw/review_categories\" --max-time 40)",
+      "Bash(curl -sL -r 0-3000 \"https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023/resolve/main/raw/review_categories/All_Beauty.jsonl\" --max-time 60 -o /tmp/ab.txt -w \"http=%{http_code} size=%{size_download}\\\\n\")",
+      "Bash(curl -s -w \"\\\\nhttp=%{http_code}\\\\n\" \"https://api.pullpush.io/reddit/search/comment/?q=redness&subreddit=SkincareAddiction&size=2\" --max-time 40 -o /tmp/pp.json)",
+      "Bash(curl -s -o /dev/null -w 'http=%{http_code}\\\\n' -A 'Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/120.0.0.0 Safari/537.36' https://api.reddit.com/r/SkincareAddiction/top?limit=2 --max-time 25)",
+      "Bash(curl -s \"https://huggingface.co/api/datasets/McAuley-Lab/Amazon-Reviews-2023/tree/main/raw/meta_categories\" --max-time 40)",
+      "Bash(curl -s \"https://huggingface.co/api/datasets/HuggingFaceGECLM/REDDIT_comments/tree/main?limit=200\" --max-time 60)",
+      "Bash(curl -s \"https://huggingface.co/api/datasets/HuggingFaceGECLM/REDDIT_comments/tree/main/data?limit=500\" --max-time 60)",
+      "Bash(git init *)",
+      "Bash(touch src/__init__.py tests/__init__.py data/raw/.gitkeep eval/results/.gitkeep)",
+      "Bash(python -m venv .venv)",
+      "Bash(.venv/Scripts/python.exe -m pip install -q --upgrade pip)",
+      "Bash(.venv/Scripts/python.exe -m pip install -q pydantic pydantic-settings pytest)",
+      "Bash(.venv/Scripts/python.exe -m pytest)",
+      "Bash(curl -sL --max-time 900 -o data/raw/skincareaddiction-00000.parquet \"https://huggingface.co/datasets/HuggingFaceGECLM/REDDIT_comments/resolve/main/data/SkincareAddiction-00000-of-00007-a87542f7633be3d0.parquet\" -w \"http=%{http_code} size=%{size_download}\\\\n\")",
+      "Bash(.venv/Scripts/python.exe -m pip install -q pyarrow)",
+      "Bash(.venv/Scripts/python.exe -c \"import pyarrow; print\\('pyarrow', pyarrow.__version__\\)\")",
+      "Bash(.venv/Scripts/python.exe -c ' *)",
+      "Bash(curl -sL --max-time 900 -o data/raw/skincareaddiction-00006.parquet \"https://huggingface.co/datasets/HuggingFaceGECLM/REDDIT_comments/resolve/main/data/SkincareAddiction-00006-of-00007-a971e65b83c30e2b.parquet\" -w \"http=%{http_code} size=%{size_download}\\\\n\")",
+      "Bash(.venv/Scripts/python.exe scripts/build_corpus.py --reddit-shard data/raw/skincareaddiction-00006.parquet)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe -c ' *)",
+      "Bash(.venv/Scripts/python.exe -m pytest -q)",
+      "Bash(git add *)",
+      "Bash(git -c user.name=Abishek -c user.email=suryanarayanan.a@northeastern.edu commit -q -m 'feat: validation core, corpus ingest, retrieval *)"
+    ]
+  }
+}

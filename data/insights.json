@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ins_01",
+    "statement": "Gen Z athletes have an unmet need around post-workout facial redness that outlasts the session itself",
+    "category": "athletic skincare",
+    "audience": "Gen Z, 18-26, trains 4+ times a week",
+    "themes": ["redness", "sweat", "irritation"],
+    "momentum": "rising"
+  },
+  {
+    "id": "ins_02",
+    "statement": "Sunscreen fails the people who need it most — it runs, stings the eyes and is never reapplied mid-activity",
+    "category": "sun care",
+    "audience": "outdoor and endurance athletes, 20-40",
+    "themes": ["sun", "sweat", "texture"],
+    "momentum": "rising"
+  },
+  {
+    "id": "ins_03",
+    "statement": "Sensitive-skin consumers want the results of actives without the barrier damage they have learned to expect",
+    "category": "sensitive skin actives",
+    "audience": "25-40, previously over-exfoliated, barrier-aware",
+    "themes": ["irritation", "acne", "redness"],
+    "momentum": "steady"
+  },
+  {
+    "id": "ins_04",
+    "statement": "Price scepticism has hardened into dupe-hunting: shoppers assume the expensive option is the same formula with better packaging",
+    "category": "value skincare",
+    "audience": "budget-conscious, ingredient-literate, 18-35",
+    "themes": ["price", "routine", "texture"],
+    "momentum": "rising"
+  },
+  {
+    "id": "ins_05",
+    "statement": "Fragrance-free has stopped being a feature and become a trust test — scent is read as a signal the brand is hiding a cheap formula",
+    "category": "clean formulation",
+    "audience": "reactive and eczema-prone skin, all ages",
+    "themes": ["fragrance", "irritation", "hydration"],
+    "momentum": "steady"
+  }
+]

@@ -1,0 +1,20 @@
+# secrets
+.env
+.streamlit/secrets.toml
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# raw source data — large downloads, regenerate with scripts/ingest_*.py
+data/raw/*
+!data/raw/.gitkeep
+
+# Raw rejection log grows without bound and is machine-generated.
+# Curated metrics and the showcase failure (§11) ARE committed — the team shares those.
+eval/results/rejections.jsonl
