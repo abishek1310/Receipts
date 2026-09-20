@@ -1,0 +1,103 @@
+{
+  "corpus_size": 400,
+  "n_briefs": 10,
+  "injected_total": 30,
+  "caught": 30,
+  "missed": 0,
+  "catch_rate_pct": 100.0,
+  "diagnosis_accuracy_pct": 100.0,
+  "valid_total": 130,
+  "valid_rejected": 10,
+  "false_positive_rate_pct": 7.69,
+  "caught_by_reason": {
+    "UNKNOWN_ID": 15,
+    "OUT_OF_SET": 15
+  },
+  "injected_by_type": {
+    "hallucinated_id": 15,
+    "out_of_set_id": 15
+  },
+  "false_positives": [
+    {
+      "brief": "brief_00",
+      "block": "h9",
+      "variant": "spf_number",
+      "text": "SPF 50. Redness is the part people actually notice. [sig_0025]",
+      "reason": "UNPARSEABLE",
+      "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
+    },
+    {
+      "brief": "brief_01",
+      "block": "h9",
+      "variant": "spf_number",
+      "text": "SPF 50. A white cast is a reason to skip protection entirely. [sig_0100]",
+      "reason": "UNPARSEABLE",
+      "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
+    },
+    {
+      "brief": "brief_02",
+      "block": "h9",
+      "variant": "spf_number",
+      "text": "SPF 50. Stinging is read as the product working, and it is not. [sig_0159]",
+      "reason": "UNPARSEABLE",
+      "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
+    },
+    {
+      "brief": "brief_03",
+      "block": "h9",
+      "variant": "spf_number",
+      "text": "SPF 50. Dupes are searched for before the original is bought. [sig_0357]",
+      "reason": "UNPARSEABLE",
+      "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
+    },
+    {
+      "brief": "brief_04",
+      "block": "h9",
+      "variant": "spf_number",
+      "text": "SPF 50. Fragrance-free is checked before the ingredient list. [sig_0312]",
+      "reason": "UNPARSEABLE",
+      "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
+    },
+    {
+      "brief": "brief_05",
+      "block": "h9",
+      "variant": "spf_number",
+      "text": "SPF 50. Stinging is read as the product working, and it is not. [sig_0121]",
+      "reason": "UNPARSEABLE",
+      "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
+    },
+    {
+      "brief": "brief_06",
+      "block": "h9",
+      "variant": "spf_number",
+      "text": "SPF 50. A white cast is a reason to skip protection entirely. [sig_0106]",
+      "reason": "UNPARSEABLE",
+      "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
+    },
+    {
+      "brief": "brief_07",
+      "block": "h9",
+      "variant": "spf_number",
+      "text": "SPF 50. Redness is the part people actually notice. [sig_0033]",
+      "reason": "UNPARSEABLE",
+      "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
+    },
+    {
+      "brief": "brief_08",
+      "block": "h9",
+      "variant": "spf_number",
+      "text": "SPF 50. Dupes are searched for before the original is bought. [sig_0344]",
+      "reason": "UNPARSEABLE",
+      "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
+    },
+    {
+      "brief": "brief_09",
+      "block": "h9",
+      "variant": "spf_number",
+      "text": "SPF 50. Flaking makes every other step look worse. [sig_0217]",
+      "reason": "UNPARSEABLE",
+      "detail": "No valid citation tag on a claim-bearing sentence: 'SPF 50.'"
+    }
+  ],
+  "misses": []
+}

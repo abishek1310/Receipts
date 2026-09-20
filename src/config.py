@@ -26,13 +26,20 @@ class Settings(BaseSettings):
     anthropic_api_key: str | None = None
     openai_api_key: str | None = None
 
-    anthropic_model: str = "claude-sonnet-5"
+    anthropic_model: str = "claude-opus-5"
     openai_model: str = "gpt-4o"
 
-    # 0.7 for copy quality. The validator is what provides safety, not a low
-    # temperature (§7) — do not turn this down hoping for fewer rejections.
+    # §7 asks for ~0.7. Current Claude models removed sampling parameters and
+    # return a 400 if sent, so `src.llm` only forwards this to models that accept
+    # it. Either way the point of §7 stands: the validator provides safety, not a
+    # low temperature — do not turn this down hoping for fewer rejections.
     temperature: float = 0.7
-    max_tokens: int = 1400
+
+    # The replacement knob on current models. "medium" keeps the demo responsive;
+    # raise to "high" if attribution quality slips.
+    effort: Literal["low", "medium", "high", "xhigh", "max"] = "medium"
+
+    max_tokens: int = 4000
 
     # --- retrieval ----------------------------------------------------------------
     retrieval_k: int = Field(default=40, ge=5, le=200)

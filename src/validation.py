@@ -57,6 +57,18 @@ _ID_IN_TAG = re.compile(r"sig_\d{4}")
 
 _TERMINATORS = ".!?…"
 
+# A dot after one of these is an abbreviation, not a full stop. Without this the
+# splitter cuts "Dr. Idriss recommends it." into two fragments and fails the first
+# one as uncited — a false positive on copy that was correctly cited.
+_ABBREVIATIONS = frozenset(
+    """
+    dr mr mrs ms prof st ave inc co ltd vs etc approx no fig dept est
+    jan feb mar apr jun jul aug sep sept oct nov dec
+    e.g i.e a.m p.m u.s u.k
+    """.split()
+)
+_ABBREV_RE = re.compile(r"([A-Za-z][A-Za-z.]*)\.$")
+
 # A sentence that is *only* one of these is not making a claim, so it needs no
 # citation. Matched whole, after lowercasing and stripping punctuation — so
 # "Shop now." is exempt but "Shop now and clear your acne overnight." is not.
@@ -126,6 +138,11 @@ def _is_boundary(text: str, term_end: int) -> bool:
         and nxt.isdigit()
     ):
         return False
+    # "Dr. Idriss" / "e.g. retinol" — a known abbreviation, not the end of a claim.
+    if text[term_end - 1] == ".":
+        m = _ABBREV_RE.search(text[:term_end])
+        if m and m.group(1).lower().rstrip(".") in _ABBREVIATIONS:
+            return False
     return nxt.isupper() or nxt.isdigit() or nxt in "\"'“‘("
 
 
@@ -142,9 +159,22 @@ def split_sentences(text: str) -> list[Sentence]:
     n = len(text)
     i = 0
     start = 0
+    in_quote = False
 
     while i < n:
-        if text[i] not in _TERMINATORS:
+        ch = text[i]
+        # A full stop inside a quotation belongs to the quotation, not to the
+        # sentence carrying it: `One reviewer put it plainly: "It stings." Redness
+        # is the part people notice. [sig_0020]` is one claim, with one citation.
+        if ch == '"' or ch == "“":
+            in_quote = not in_quote if ch == '"' else True
+            i += 1
+            continue
+        if ch == "”":
+            in_quote = False
+            i += 1
+            continue
+        if in_quote or ch not in _TERMINATORS:
             i += 1
             continue
 

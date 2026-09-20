@@ -1,0 +1,8 @@
+# Dev + ingest only. Not installed on Streamlit Community Cloud.
+-r requirements.txt
+
+# Reading the Reddit parquet shards in scripts/build_corpus.py. The app never
+# touches parquet — it reads data/signals.jsonl, which is committed.
+pyarrow==25.0.1
+
+pytest==9.1.1

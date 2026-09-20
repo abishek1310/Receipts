@@ -292,6 +292,31 @@ def test_ellipsis_and_exclamations_are_handled():
     assert r.status == "PASS"
 
 
+def test_abbreviation_does_not_split_a_sentence():
+    r = validate_block(block("Dr. Idriss says the flush lingers. [sig_0001]"), EVIDENCE, CORPUS)
+    assert r.status == "PASS"
+
+
+def test_inline_eg_does_not_split_a_sentence():
+    r = validate_block(block("The flush lingers, e.g. after hot yoga. [sig_0001]"), EVIDENCE, CORPUS)
+    assert r.status == "PASS"
+
+
+def test_punctuation_inside_a_quotation_does_not_split():
+    text = 'One reviewer put it plainly: "It stings." The barrier gives out. [sig_0001]'
+    assert validate_block(block(text), EVIDENCE, CORPUS).status == "PASS"
+
+
+def test_known_limitation_a_leading_fragment_is_treated_as_an_uncited_claim():
+    # "SPF 50." is a spec, not a claim, but the splitter cannot tell. This is the
+    # documented false positive in eval/results/report.md — it is over-strictness,
+    # which costs a rewrite rather than letting an uncited claim through. Change
+    # this test only alongside the eval number it corresponds to.
+    r = validate_block(block("SPF 50. The flush lingers. [sig_0001]"), EVIDENCE, CORPUS)
+    assert r.status == "FAIL"
+    assert r.reason is FailureReason.UNPARSEABLE
+
+
 def test_tag_before_the_sentence_does_not_count_as_citing_it():
     # A leading tag belongs to no sentence, so the claim after it is uncited.
     r = validate_block(block("[sig_0001] Redness outlasts the workout."), EVIDENCE, CORPUS)

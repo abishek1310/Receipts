@@ -148,6 +148,12 @@ class GenerationResult(BaseModel):
     evidence_set: list[Signal] = Field(default_factory=list)
     attempts: int = 1
     retrieved_fresh: bool = True
+    # Set when the provider or the response shape failed outright — not a
+    # citation rejection, which is carried per-block on the outcomes.
+    error: str | None = None
+    # Plain-language note for the UI about why the evidence set was or was not
+    # re-retrieved this turn (§9).
+    evidence_note: str = ""
 
     @property
     def n_generated(self) -> int:
