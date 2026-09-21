@@ -58,6 +58,15 @@ away: a leading fragment like `SPF 50.` is treated as an uncited claim. The
 sentence splitter errs toward splitting, so ambiguity costs a rewrite instead of
 letting an uncited claim through. That is the trade we chose.
 
+**Catch rate is not the same as "the citation supports the claim."** Reading
+real output from the deployed app turned up three ways a citation stays
+perfectly valid while the sentence drifts away from it — sentiment inversion,
+scope-and-certainty upgrade, and relevance drift. All three pass the validator,
+none are fixable with a stricter regex, and fixing them properly would require
+a model to judge what counts as support — which is the thing this project
+exists to replace. They are written up with verified examples in
+`eval/results/report.md`.
+
 ---
 
 ## The four ways a citation fails
